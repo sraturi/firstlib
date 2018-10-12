@@ -1,0 +1,66 @@
+plugins{
+    id 'maven-publish'
+}
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+/*
+    <server>
+    <id>bintray-sraturi-sachin</id>
+                <username>sraturi</username>
+    <password>**********</password>
+
+</server>
+
+    <url>https://api.bintray.com/maven/sraturi/sachin/[PACKAGE_NAME]/;publish=1</url>
+*/
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+publishing{
+    repositories{
+        maven{
+            url = 'https://api.bintray.com/maven/sraturi/'
+            credentials{
+                username 'sraturi'
+                password '384a9dfba77e584ecf84a36e2b9551bb48c84af3'
+            }
+        }
+    }
+    publications{
+        publishNormal(MavenPublication){
+            groupId 'sachin'
+            artifactId 'fyretr'
+            version '0.1'
+            artifact("$buildDir/outputs/aar/mfirstlib-release.aar")
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
