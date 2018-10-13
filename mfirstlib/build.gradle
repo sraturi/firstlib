@@ -1,21 +1,14 @@
 plugins{
     id 'maven-publish'
 }
+plugins {
+    id "com.jfrog.bintray" version "1.5"
+}
 apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
 
-/*
-    <server>
-    <id>bintray-sraturi-sachin</id>
-                <username>sraturi</username>
-    <password>**********</password>
-
-</server>
-
-    <url>https://api.bintray.com/maven/sraturi/sachin/[PACKAGE_NAME]/;publish=1</url>
-*/
 
     defaultConfig {
         minSdkVersion 15
@@ -37,23 +30,30 @@ android {
 }
 
 publishing{
-    repositories{
-        maven{
-            url = 'https://api.bintray.com/maven/sraturi/'
-            credentials{
-                username 'sraturi'
-                password '384a9dfba77e584ecf84a36e2b9551bb48c84af3'
-            }
-        }
-    }
     publications{
         publishNormal(MavenPublication){
             groupId 'sachin'
-            artifactId 'fyretr'
+            artifactId 'firstpack'
             version '0.1'
             artifact("$buildDir/outputs/aar/mfirstlib-release.aar")
         }
     }
+}
+bintray {
+    user = ''
+    key = ''
+    pkg {
+        repo = 'sachin'
+        name = 'firstpack'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/sraturi/firstlib.git'
+        version {
+            name = '0.1'
+            desc = 'Gradle Bintray Plugin 1.0 final'
+            released  = new Date()
+        }
+    }
+    publications = ['publishNormal']
 }
 
 dependencies {
