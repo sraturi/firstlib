@@ -1,2 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mfirstlib" />
+    package="com.example.mfirstlib">
+
+    <application>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MathLib" />
+    </application>
+
+</manifest>
